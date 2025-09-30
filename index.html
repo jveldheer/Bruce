@@ -5,558 +5,357 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bruce NFL Training Program</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f3f4f6;
-            color: #1f2937;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.25rem;
-        }
-
-        header p {
-            color: #d1d5db;
-            font-size: 0.875rem;
-        }
-
-        .nav-container {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .sidebar {
-            width: 250px;
-            flex-shrink: 0;
-        }
-
-        .nav-menu {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            overflow: hidden;
-            position: sticky;
-            top: 1rem;
-        }
-
-        .nav-btn {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            text-align: left;
-            border: none;
-            background: white;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .nav-btn:hover {
-            background: #f3f4f6;
-        }
-
-        .nav-btn.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .nav-btn:not(:last-child) {
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .content-section {
-            display: none;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        .card {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .gradient-card {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-size: 1.125rem;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-            color: #1f2937;
-        }
-
-        h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .stat-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            opacity: 0.8;
-        }
-
-        .stat-value {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .goals-list {
-            list-style: none;
-        }
-
-        .goals-list li {
-            margin-bottom: 0.75rem;
-        }
-
-        .equipment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .equipment-item {
-            background: #f9fafb;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            text-align: center;
-            font-size: 0.875rem;
-        }
-
-        .alert {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            border-left: 4px solid #f59e0b;
-            background: #fffbeb;
-            border-radius: 0.375rem;
-        }
-
-        .alert-title {
-            font-weight: 600;
-            color: #92400e;
-            font-size: 0.875rem;
-        }
-
-        .alert-text {
-            color: #78350f;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
-        .week-card {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .week-header {
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            color: white;
-            padding: 1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .week-header:hover {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        }
-
-        .week-content {
-            display: none;
-            padding: 1.5rem;
-        }
-
-        .week-content.active {
-            display: block;
-        }
-
-        footer {
-            background: #1f2937;
-            color: #9ca3af;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-            }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1 { color: #1f2937; border-bottom: 3px solid #2563eb; padding-bottom: 10px; margin-bottom: 10px; }
+        h2 { color: #2563eb; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; padding-bottom: 5px; }
+        h3 { color: #374151; margin-top: 20px; margin-bottom: 10px; }
+        h4 { color: #1f2937; margin-top: 15px; margin-bottom: 8px; font-size: 1.1em; }
+        p { margin-bottom: 8px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .subtitle { color: #6b7280; font-size: 0.9em; }
+        .section { margin-bottom: 40px; page-break-inside: avoid; }
+        .profile-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0; }
+        .profile-item { background: #f3f4f6; padding: 15px; border-radius: 5px; text-align: center; }
+        .profile-label { font-size: 0.85em; color: #6b7280; margin-bottom: 5px; }
+        .profile-value { font-size: 1.2em; font-weight: bold; color: #1f2937; }
+        .goals { background: #eff6ff; padding: 20px; border-left: 4px solid #2563eb; margin: 20px 0; }
+        .goals li { margin-bottom: 8px; }
+        .equipment { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 15px 0; }
+        .equipment-item { background: #f9fafb; padding: 8px; text-align: center; border-radius: 3px; font-size: 0.9em; }
+        .alert { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 15px; margin: 15px 0; }
+        .week { background: #f9fafb; padding: 20px; margin: 20px 0; border-radius: 5px; page-break-inside: avoid; }
+        .week-title { background: #374151; color: white; padding: 12px; margin: -20px -20px 15px -20px; border-radius: 5px 5px 0 0; font-weight: bold; }
+        .workout { margin: 15px 0; padding: 15px; background: white; border-left: 3px solid #2563eb; }
+        .workout h4 { margin-top: 0; color: #2563eb; }
+        .nutrition-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+        .nutrition-card { background: #f9fafb; padding: 15px; border-radius: 5px; }
+        @media print {
+            body { max-width: 100%; }
+            .section { page-break-inside: avoid; }
+            .week { page-break-inside: avoid; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Bruce's NFL Off-Season Block</h1>
-            <p>Veldheer Lineman Vault Program</p>
+    <div class="header">
+        <h1>BRUCE'S NFL OFF-SEASON BLOCK</h1>
+        <p class="subtitle">Veldheer Lineman Vault Program</p>
+    </div>
+
+    <div class="section">
+        <h2>ATHLETE PROFILE</h2>
+        <div class="profile-grid">
+            <div class="profile-item">
+                <div class="profile-label">Name</div>
+                <div class="profile-value">Bruce</div>
+            </div>
+            <div class="profile-item">
+                <div class="profile-label">Height/Weight</div>
+                <div class="profile-value">6 ft 3 in | 263 lb</div>
+            </div>
+            <div class="profile-item">
+                <div class="profile-label">Body Fat</div>
+                <div class="profile-value">20%</div>
+            </div>
+            <div class="profile-item">
+                <div class="profile-label">Training Days</div>
+                <div class="profile-value">4/Week</div>
+            </div>
         </div>
-    </header>
 
-    <div class="container">
-        <div class="nav-container">
-            <aside class="sidebar">
-                <nav class="nav-menu">
-                    <button class="nav-btn active" onclick="showSection('snapshot')">Snapshot</button>
-                    <button class="nav-btn" onclick="showSection('program')">6-Week Program</button>
-                    <button class="nav-btn" onclick="showSection('nutrition')">Nutrition</button>
-                </nav>
-            </aside>
+        <div class="goals">
+            <h3>Primary Goals</h3>
+            <ul>
+                <li>Drop to 230 lb at 10-12% body fat</li>
+                <li>Maintain explosiveness and strength-to-bodyweight ratio</li>
+                <li>Stay mobile, pain-free, and energized for family</li>
+            </ul>
+        </div>
 
-            <main class="main-content">
-                <div id="snapshot" class="content-section active">
-                    <div class="card gradient-card">
-                        <h2>Athlete Profile</h2>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <p class="stat-label">Name</p>
-                                <p class="stat-value">Bruce</p>
-                            </div>
-                            <div class="stat-item">
-                                <p class="stat-label">Stats</p>
-                                <p class="stat-value">6'3" | 263 lb</p>
-                            </div>
-                            <div class="stat-item">
-                                <p class="stat-label">Body Fat</p>
-                                <p class="stat-value">20%</p>
-                            </div>
-                            <div class="stat-item">
-                                <p class="stat-label">Training</p>
-                                <p class="stat-value">4 Days/Week</p>
-                            </div>
-                        </div>
-                    </div>
+        <h3>Available Equipment</h3>
+        <div class="equipment">
+            <div class="equipment-item">Barbell</div>
+            <div class="equipment-item">Dumbbells</div>
+            <div class="equipment-item">Kettlebells</div>
+            <div class="equipment-item">Sled</div>
+            <div class="equipment-item">Bands</div>
+            <div class="equipment-item">Med Balls</div>
+            <div class="equipment-item">Reverse Hyper</div>
+            <div class="equipment-item">Cables</div>
+        </div>
 
-                    <div class="card">
-                        <h3>Primary Goals</h3>
-                        <ul class="goals-list">
-                            <li>Drop to 230 lb at 10-12% body fat</li>
-                            <li>Maintain explosiveness and strength</li>
-                            <li>Stay mobile and pain-free</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <h3>Available Equipment</h3>
-                        <div class="equipment-grid">
-                            <div class="equipment-item">Barbell</div>
-                            <div class="equipment-item">Dumbbells</div>
-                            <div class="equipment-item">Kettlebells</div>
-                            <div class="equipment-item">Sled</div>
-                            <div class="equipment-item">Bands</div>
-                            <div class="equipment-item">Med Balls</div>
-                            <div class="equipment-item">Reverse Hyper</div>
-                            <div class="equipment-item">Cables</div>
-                        </div>
-                        <div class="alert">
-                            <p class="alert-title">Missing: Nordic board, Neck machine</p>
-                            <p class="alert-text">Substitutions included in program</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="program" class="content-section">
-                    <div class="week-card">
-                        <div class="week-header" onclick="toggleWeek(1)">
-                            <span>Week 1: Foundation & Control</span>
-                            <span id="arrow1">v</span>
-                        </div>
-                        <div id="week1" class="week-content">
-                            <h4>Monday - Lower 1</h4>
-                            <p>Sled: 2x8 (7s on, 20s off)</p>
-                            <p>Single-Leg Box Jump 2x5 each</p>
-                            <p>Box Squat 4x5 @ RPE 7 (3-1-1 tempo)</p>
-                            <p>Barbell Step Up 3x6 each</p>
-                            <p>Single-Leg RDL 3x8 each</p>
-
-                            <h4>Tuesday - Upper 1</h4>
-                            <p>Med Ball Punch 4x5</p>
-                            <p>Bench Press 5x5 @ RPE 7-8</p>
-                            <p>Band Pull-Apart 3x15</p>
-                            <p>TRX Row 3x10</p>
-                            <p>Neck Bridge 2x30s</p>
-
-                            <h4>Thursday - Lower 2</h4>
-                            <p>Sled: 2x8</p>
-                            <p>Goblet or Zercher Squat 4x6 @ RPE 7</p>
-                            <p>DB Split Squat 3x8 each</p>
-                            <p>Glute Bridge 3x10 each</p>
-
-                            <h4>Friday - Upper 2</h4>
-                            <p>Floor Chest Pass 4x5</p>
-                            <p>Incline Speed Press 6x3</p>
-                            <p>Pull-Ups 4xAMRAP</p>
-                            <p>Landmine Press 3x8 each</p>
-                        </div>
-                    </div>
-
-                    <div class="week-card">
-                        <div class="week-header" onclick="toggleWeek(2)">
-                            <span>Week 2: Volume & Footwork</span>
-                            <span id="arrow2">v</span>
-                        </div>
-                        <div id="week2" class="week-content">
-                            <h4>Monday - Lower 1</h4>
-                            <p>Sled: 3x8</p>
-                            <p>Box Squat 5x4 @ RPE 8</p>
-                            <p>Step Ups 3x6 each</p>
-                            <p>Single-Leg RDL 3x8 each</p>
-
-                            <h4>Tuesday - Upper 1</h4>
-                            <p>Bench Press 5x4 @ RPE 8</p>
-                            <p>TRX Row 4x8 (3s down)</p>
-                            <p>Neck Bridge 3x30s</p>
-                            <p>Face Pull 3x15</p>
-
-                            <h4>Thursday - Lower 2</h4>
-                            <p>Sled: 3x8</p>
-                            <p>Goblet or Zercher Squat 5x4 @ RPE 8</p>
-                            <p>DB Split Squat 3x6 each</p>
-
-                            <h4>Friday - Upper 2</h4>
-                            <p>Incline Speed Press 6x3</p>
-                            <p>Pull-Ups 5 sets AMRAP</p>
-                            <p>Landmine Press 3x8 each</p>
-                        </div>
-                    </div>
-
-                    <div class="week-card">
-                        <div class="week-header" onclick="toggleWeek(3)">
-                            <span>Week 3: Strength to Speed Bridge</span>
-                            <span id="arrow3">v</span>
-                        </div>
-                        <div id="week3" class="week-content">
-                            <h4>Monday - Lower 1</h4>
-                            <p>Sled: 3x8</p>
-                            <p>Box Squat 6x3 @ RPE 8 (last rep fast)</p>
-                            <p>RFESS 4x6 each</p>
-                            <p>Cross-Over Step Up 3x8 each</p>
-
-                            <h4>Tuesday - Upper 1</h4>
-                            <p>Bench Press 6x3 @ RPE 8 (speed up)</p>
-                            <p>TRX Row 4x8 (3s down, 1s hold)</p>
-                            <p>Pull-Ups 5xAMRAP</p>
-
-                            <h4>Thursday - Lower 2</h4>
-                            <p>Sled: 3x8</p>
-                            <p>Goblet or Zercher Squat 6x3 @ RPE 8</p>
-                            <p>DB Split Squat 4x6 each</p>
-
-                            <h4>Friday - Upper 2</h4>
-                            <p>Incline Speed Press 6x3 (speed focus)</p>
-                            <p>Pull-Ups 5xAMRAP</p>
-                            <p>Landmine Press 4x6 each</p>
-                        </div>
-                    </div>
-
-                    <div class="week-card">
-                        <div class="week-header" onclick="toggleWeek(4)">
-                            <span>Week 4: High Volume + Helmet Sled</span>
-                            <span id="arrow4">v</span>
-                        </div>
-                        <div id="week4" class="week-content">
-                            <h4>Monday - Lower 1</h4>
-                            <p>Sled: 4x8 (first 3 sets w/ 20lb vest, all w/ helmet)</p>
-                            <p>Box Squat 5x3 @ RPE 8-9</p>
-                            <p>Step Up 4x6 each</p>
-
-                            <h4>Tuesday - Upper 1</h4>
-                            <p>Bench Press 5x3 @ RPE 8-9</p>
-                            <p>TRX Row 4x6 (3-4s down)</p>
-                            <p>Pull-Ups 6xAMRAP</p>
-
-                            <h4>Thursday - Lower 2</h4>
-                            <p>Sled: 4x8 (vest + helmet)</p>
-                            <p>Goblet or Zercher Squat 5x3 @ RPE 8-9</p>
-                            <p>DB Split Squat 4x6 each</p>
-
-                            <h4>Friday - Upper 2</h4>
-                            <p>Incline Speed Press 6x3</p>
-                            <p>Pull-Ups 6xAMRAP</p>
-                            <p>Landmine Press 3x8 each</p>
-                        </div>
-                    </div>
-
-                    <div class="week-card">
-                        <div class="week-header" onclick="toggleWeek(5)">
-                            <span>Week 5: Peak Bar Speed + Full Vest</span>
-                            <span id="arrow5">v</span>
-                        </div>
-                        <div id="week5" class="week-content">
-                            <h4>Monday - Lower 1</h4>
-                            <p>Sled: 4x8 (all 4 sets w/ 20lb vest + helmet)</p>
-                            <p>Box Squat 6x2 @ RPE 8 (MAX speed)</p>
-                            <p>Step Up 4x5 each</p>
-
-                            <h4>Tuesday - Upper 1</h4>
-                            <p>Bench Press 8x2 @ RPE 8 (speed)</p>
-                            <p>TRX Row 5x6 (3-4s down)</p>
-                            <p>Pull-Ups 6xAMRAP</p>
-
-                            <h4>Thursday - Lower 2</h4>
-                            <p>Sled: 4x8 (all vest + helmet)</p>
-                            <p>Goblet or Zercher Squat 6x2 @ RPE 8 (speed)</p>
-                            <p>DB Split Squat 4x5 each</p>
-
-                            <h4>Friday - Upper 2</h4>
-                            <p>Incline Speed Press 8x2 (max speed)</p>
-                            <p>Pull-Ups 6xAMRAP</p>
-                            <p>Landmine Press 4x6 each</p>
-                        </div>
-                    </div>
-
-                    <div class="week-card">
-                        <div class="week-header" onclick="toggleWeek(6)">
-                            <span>Week 6: Deload & Movement Refinement</span>
-                            <span id="arrow6">v</span>
-                        </div>
-                        <div id="week6" class="week-content">
-                            <h4>Monday - Lower 1</h4>
-                            <p>Sled: 2x8</p>
-                            <p>Box Squat 3x3 @ RPE 6-7</p>
-                            <p>Step Up 2x6 each</p>
-
-                            <h4>Tuesday - Upper 1</h4>
-                            <p>Bench Press 3x3 @ RPE 6-7</p>
-                            <p>TRX Row 2x6 (6s down)</p>
-                            <p>Face Pull 2x12</p>
-
-                            <h4>Thursday - Lower 2</h4>
-                            <p>Sled: 2x8</p>
-                            <p>Goblet or Zercher Squat 3x3 @ RPE 6-7</p>
-                            <p>DB Split Squat 2x6 each</p>
-
-                            <h4>Friday - Upper 2</h4>
-                            <p>Incline Speed Press 3x3 @ RPE 6-7</p>
-                            <p>Pull-Ups 2xAMRAP</p>
-                            <p>Landmine Press 2x8 each</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="nutrition" class="content-section">
-                    <div class="card">
-                        <h3>Daily Nutrition Targets</h3>
-                        <p><strong>Lift Days:</strong> 3,200-3,350 calories</p>
-                        <p><strong>Rest Days:</strong> 3,000-3,150 calories</p>
-                        <p><strong>Protein:</strong> 230-260g daily (all days)</p>
-                        <p><strong>Carbs:</strong> 350-425g lift days | 275-325g rest days</p>
-                        <p><strong>Fats:</strong> 90-110g lift days | 100-120g rest days</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>Nutrient Timing</h3>
-                        <p><strong>Pre-Lift (60-90 min):</strong> 40-60g carbs + 25-40g protein</p>
-                        <p><strong>Post-Lift:</strong> 40g whey + fruit</p>
-                        <p><strong>Hydration:</strong> 158 oz daily + electrolytes</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>Food Sources</h3>
-                        <p><strong>Proteins:</strong> Eggs, beef, bison, chicken, salmon, Greek yogurt, cottage cheese</p>
-                        <p><strong>Carbs:</strong> Rice, potatoes, oats, fruit, honey, tortillas, pasta</p>
-                        <p><strong>Fats:</strong> Olive oil, avocado, nuts, butter, cheese</p>
-                    </div>
-                </div>
-            </main>
+        <div class="alert">
+            <strong>Missing Equipment:</strong> Nordic board, Neck machine<br>
+            <em>Substitutions included in program</em>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>Built from NFL Block files - Clear, Complete, Smart</p>
+    <div class="section">
+        <h2>6-WEEK PROGRAM</h2>
+
+        <div class="week">
+            <div class="week-title">WEEK 1: Foundation & Control</div>
+            
+            <div class="workout">
+                <h4>Monday - Lower 1</h4>
+                <p>Sled: 2x8 (7s on, 20s off)</p>
+                <p>Single-Leg Box Jump 2x5 each</p>
+                <p>Box Squat 4x5 @ RPE 7 (3-1-1 tempo)</p>
+                <p>Barbell Step Up 3x6 each</p>
+                <p>Single-Leg RDL 3x8 each</p>
+                <p>Reverse Hyper 2x15 | Calf 3x12 | Toe Raise 3x15</p>
+            </div>
+
+            <div class="workout">
+                <h4>Tuesday - Upper 1</h4>
+                <p>Med Ball Punch 4x5</p>
+                <p>Bench Press 5x5 @ RPE 7-8</p>
+                <p>Band Pull-Apart 3x15</p>
+                <p>TRX Row 3x10</p>
+                <p>Neck Bridge 2x30s | Face Pull 3x15</p>
+                <p>Dead Bug 3x8 each | Pallof Press 3x10 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Thursday - Lower 2</h4>
+                <p>Sled: 2x8</p>
+                <p>Single-Leg Box Jump 2x5 each</p>
+                <p>Goblet or Zercher Squat 4x6 @ RPE 7</p>
+                <p>DB Split Squat 3x8 each</p>
+                <p>Elevated Single-Leg Glute Bridge 3x10 each</p>
+                <p>Calf 3x12 | Toe Raise 3x15</p>
+            </div>
+
+            <div class="workout">
+                <h4>Friday - Upper 2</h4>
+                <p>Floor Chest Pass 4x5</p>
+                <p>Incline Speed Press 6x3 (60s rest)</p>
+                <p>Pull-Ups 4xAMRAP</p>
+                <p>1-Arm Row 3x10 each</p>
+                <p>Half-Kneeling Landmine Press 3x8 each</p>
+                <p>Powell Raise 2x12 each | Face Pull 2x15</p>
+            </div>
         </div>
-    </footer>
 
-    <script>
-        function showSection(sectionId) {
-            var sections = document.querySelectorAll('.content-section');
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.remove('active');
-            }
+        <div class="week">
+            <div class="week-title">WEEK 2: Volume & Footwork</div>
             
-            var buttons = document.querySelectorAll('.nav-btn');
-            for (var j = 0; j < buttons.length; j++) {
-                buttons[j].classList.remove('active');
-            }
-            
-            document.getElementById(sectionId).classList.add('active');
-            window.event.target.classList.add('active');
-        }
+            <div class="workout">
+                <h4>Monday - Lower 1</h4>
+                <p>Sled: 3x8</p>
+                <p>Box Squat 5x4 @ RPE 8</p>
+                <p>Step Ups 3x6 each</p>
+                <p>Single-Leg RDL 3x8 each</p>
+                <p>Reverse Hyper 3x12 | Calf 3x12 | Toe Raise 3x15</p>
+            </div>
 
-        function toggleWeek(weekNum) {
-            var content = document.getElementById('week' + weekNum);
-            var arrow = document.getElementById('arrow' + weekNum);
+            <div class="workout">
+                <h4>Tuesday - Upper 1</h4>
+                <p>Bench Press 5x4 @ RPE 8</p>
+                <p>TRX Row 4x8 (3s down)</p>
+                <p>Neck Bridge 3x30s</p>
+                <p>Pull-Ups 5 sets total reps</p>
+                <p>Face Pull 3x15 | Landmine Press 3x8 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Thursday - Lower 2</h4>
+                <p>Sled: 3x8</p>
+                <p>Goblet or Zercher Squat 5x4 @ RPE 8</p>
+                <p>DB Split Squat 3x6 each</p>
+                <p>Elevated Single-Leg Glute Bridge 3x10 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Friday - Upper 2</h4>
+                <p>Incline Speed Press 6x3</p>
+                <p>Pull-Ups 5 sets AMRAP</p>
+                <p>Landmine Press 3x8 each | Powell Raise 3x10 each</p>
+            </div>
+        </div>
+
+        <div class="week">
+            <div class="week-title">WEEK 3: Strength to Speed Bridge</div>
             
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                arrow.textContent = 'v';
-            } else {
-                content.classList.add('active');
-                arrow.textContent = '^';
-            }
-        }
-    </script>
+            <div class="workout">
+                <h4>Monday - Lower 1</h4>
+                <p>Sled: 3x8</p>
+                <p>Box Squat 6x3 @ RPE 8 (last rep fast)</p>
+                <p>RFESS 4x6 each | Cross-Over Step Up 3x8 each</p>
+                <p>Single-Leg RDL 3x6 each | Reverse Hyper 3x12</p>
+            </div>
+
+            <div class="workout">
+                <h4>Tuesday - Upper 1</h4>
+                <p>Bench Press 6x3 @ RPE 8 (speed focus)</p>
+                <p>TRX Row 4x8 (3s down, 1s hold at top)</p>
+                <p>Neck Bridge 3x30-40s</p>
+                <p>Pull-Ups 5xAMRAP | Landmine Press 4x6 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Thursday - Lower 2</h4>
+                <p>Sled: 3x8</p>
+                <p>Goblet or Zercher Squat 6x3 @ RPE 8</p>
+                <p>DB Split Squat 4x6 each</p>
+                <p>Elevated Single-Leg Glute Bridge 3x10 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Friday - Upper 2</h4>
+                <p>Incline Speed Press 6x3 (speed focus)</p>
+                <p>Pull-Ups 5xAMRAP</p>
+                <p>Landmine Press 4x6 each | Powell Raise 3x12 each</p>
+            </div>
+        </div>
+
+        <div class="week">
+            <div class="week-title">WEEK 4: High Volume + Helmet Sled</div>
+            
+            <div class="workout">
+                <h4>Monday - Lower 1</h4>
+                <p>Sled: 4x8 (first 3 sets w/ 20lb vest, all w/ helmet)</p>
+                <p>Box Squat 5x3 @ RPE 8-9</p>
+                <p>Step Up 4x6 each | Single-Leg RDL 3x6 each</p>
+                <p>Reverse Hyper 3x15 | Calf 4x10</p>
+            </div>
+
+            <div class="workout">
+                <h4>Tuesday - Upper 1</h4>
+                <p>Bench Press 5x3 @ RPE 8-9</p>
+                <p>TRX Row 4x6 (3-4s down)</p>
+                <p>Neck Bridge 3x40s</p>
+                <p>Pull-Ups 6xAMRAP | Face Pull 3x12</p>
+            </div>
+
+            <div class="workout">
+                <h4>Thursday - Lower 2</h4>
+                <p>Sled: 4x8 (first 3 sets w/ 20lb vest, all w/ helmet)</p>
+                <p>Goblet or Zercher Squat 5x3 @ RPE 8-9</p>
+                <p>DB Split Squat 4x6 each</p>
+                <p>Elevated Single-Leg Glute Bridge 3x10 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Friday - Upper 2</h4>
+                <p>Incline Speed Press 6x3</p>
+                <p>Pull-Ups 6xAMRAP</p>
+                <p>Landmine Press 3x8 each | Powell Raise 3x12 each</p>
+            </div>
+        </div>
+
+        <div class="week">
+            <div class="week-title">WEEK 5: Peak Bar Speed + Full Vest</div>
+            
+            <div class="workout">
+                <h4>Monday - Lower 1</h4>
+                <p>Sled: 4x8 (all 4 sets w/ 20lb vest + helmet)</p>
+                <p>Box Squat 6x2 @ RPE 8 (MAX bar speed)</p>
+                <p>Step Up 4x5 each | Single-Leg RDL 4x6 each</p>
+                <p>Reverse Hyper 3x15 | Calf 4x10</p>
+            </div>
+
+            <div class="workout">
+                <h4>Tuesday - Upper 1</h4>
+                <p>Bench Press 8x2 @ RPE 8 (speed emphasis)</p>
+                <p>TRX Row 5x6 (3-4s down)</p>
+                <p>Neck Bridge 3x45s</p>
+                <p>Pull-Ups 6xAMRAP | Face Pull 3x12</p>
+            </div>
+
+            <div class="workout">
+                <h4>Thursday - Lower 2</h4>
+                <p>Sled: 4x8 (all 4 sets w/ 20lb vest + helmet)</p>
+                <p>Goblet or Zercher Squat 6x2 @ RPE 8 (speed)</p>
+                <p>DB Split Squat 4x5 each</p>
+                <p>Elevated Single-Leg Glute Bridge 4x10 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Friday - Upper 2</h4>
+                <p>Incline Speed Press 8x2 (max speed)</p>
+                <p>Pull-Ups 6xAMRAP</p>
+                <p>Landmine Press 4x6 each | Powell Raise 3x12 each</p>
+            </div>
+        </div>
+
+        <div class="week">
+            <div class="week-title">WEEK 6: Deload & Movement Refinement</div>
+            
+            <div class="workout">
+                <h4>Monday - Lower 1</h4>
+                <p>Sled: 2x8</p>
+                <p>Box Squat 3x3 @ RPE 6-7</p>
+                <p>Step Up 2x6 each | Single-Leg RDL 2x8 each</p>
+                <p>Reverse Hyper 2x12 | Calf 2x12</p>
+            </div>
+
+            <div class="workout">
+                <h4>Tuesday - Upper 1</h4>
+                <p>Bench Press 3x3 @ RPE 6-7</p>
+                <p>TRX Row 2x6 (6-second eccentrics)</p>
+                <p>Neck Bridge 2x45s | Face Pull 2x12</p>
+            </div>
+
+            <div class="workout">
+                <h4>Thursday - Lower 2</h4>
+                <p>Sled: 2x8</p>
+                <p>Goblet or Zercher Squat 3x3 @ RPE 6-7</p>
+                <p>DB Split Squat 2x6 each</p>
+                <p>Elevated Single-Leg Glute Bridge 2x10 each</p>
+            </div>
+
+            <div class="workout">
+                <h4>Friday - Upper 2</h4>
+                <p>Incline Speed Press 3x3 @ RPE 6-7</p>
+                <p>Pull-Ups 2xAMRAP</p>
+                <p>Landmine Press 2x8 each | Powell Raise 2x10 each</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>NUTRITION STRATEGY</h2>
+        
+        <div class="nutrition-grid">
+            <div class="nutrition-card">
+                <h3>Daily Calorie Targets</h3>
+                <p><strong>Lift Days:</strong> 3,200-3,350 calories</p>
+                <p><strong>Rest Days:</strong> 3,000-3,150 calories</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Macronutrient Distribution</h3>
+                <p><strong>Protein:</strong> 230-260g daily (all days)</p>
+                <p><strong>Carbs:</strong> 350-425g lift | 275-325g rest</p>
+                <p><strong>Fats:</strong> 90-110g lift | 100-120g rest</p>
+            </div>
+        </div>
+
+        <h3>Nutrient Timing</h3>
+        <p><strong>Pre-Lift (60-90 min before):</strong> 40-60g carbs + 25-40g protein</p>
+        <p><strong>Post-Lift (immediately after):</strong> 40g whey protein + fruit</p>
+        <p><strong>Hydration:</strong> 158 oz daily (0.6 oz per lb bodyweight) + electrolytes during heavy sweat sessions</p>
+
+        <h3>Food Sources</h3>
+        <p><strong>Proteins:</strong> Eggs, beef, bison, chicken thighs, salmon, Greek yogurt, cottage cheese, jerky</p>
+        <p><strong>Carbohydrates:</strong> Rice, potatoes, oats, fruit, honey, tortillas, rice cakes, pasta</p>
+        <p><strong>Fats:</strong> Olive oil, avocado, nuts, butter, cheese</p>
+
+        <h3>Thorne Supplement Protocol</h3>
+        <p><strong>Essential Foundation:</strong> Creatine 10g morning + 10g evening | D-5000 1 cap daily | Super EPA 2-3 caps daily</p>
+        <p><strong>Performance Support:</strong> Amino Complex around training | Beta Alanine-SR 2 tabs twice daily | Catalyte 1-2 scoops daily</p>
+        <p><strong>Recovery & Health:</strong> Curcumin 4 caps daily | Magnesium Bisglycinate at bedtime</p>
+    </div>
+
+    <div class="section">
+        <h2>KEY PRINCIPLES</h2>
+        <p><strong>RPE Guide:</strong> RPE 7 = 3 reps in reserve | RPE 9 = 1 rep in reserve</p>
+        <p><strong>Rest Periods:</strong> Heavy sets 3-4 min | Supersets 30-45 sec</p>
+        <p><strong>Auto-Regulation:</strong> Sleep less than 8.5 hours = reduce load 15-20% and skip jumps</p>
+        <p><strong>Pain Management:</strong> Remove trigger exercise, substitute similar pattern, or hold 30-45s mid-range isometric</p>
+    </div>
+
 </body>
 </html>
